@@ -1,0 +1,6 @@
+site_name: Phases Assessment Instrument
+site_description: A tool for assessing the phases of a project.
+theme:
+  name: material
+nav:
+  - Home: index.md
