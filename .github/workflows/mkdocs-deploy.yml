@@ -1,0 +1,52 @@
+# .github/workflows/deploy.yml
+
+name: Deploy MkDocs Site to GitHub Pages
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push events but only for the main branch
+  push:
+    branches:
+      - main  # Or 'master' if that's your default branch
+    paths:
+      - 'mkdocs.yml' # Only trigger if the mkdocs.yml file changes
+      - src/schemass/asti_schema.yaml
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+# This is specifically for actions that push to branches.
+permissions:
+  contents: write # Required to push to the gh-pages branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4 # Checks out your repository under $GITHUB_WORKSPACE
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+          cache: 'pip' # Cache pip dependencies
+      - run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV # Set cache ID for pip dependencies
+      - uses: actions/cache@v3 # Caches pip dependencies
+        with:
+          key: mkdocs-material-${{ env.cache_id }}
+          path: .cache
+          restore-keys: |
+            mkdocs-material
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Build and deploy MkDocs site
+        run: |
+          mkdir -p docs
+          mkdir -p docs/images
+          touch docs/.nojekyll
+          make gendoc
+          mkdocs gh-deploy --force

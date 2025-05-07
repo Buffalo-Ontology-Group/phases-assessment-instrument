@@ -1,0 +1,254 @@
+id: https://w3id.org/phases/assessment/gerotranscendance/asti
+name: asti-assessment-schema
+title: Adult Self-Transcendence Inventory (ASTI) Assessment Schema
+description: >-
+  LinkML schema for capturing data from an instance of the Adult Self-Transcendence Inventory (ASTI).
+  The ASTI assesses self-transcendence by comparing current feelings to those of five years ago.
+
+prefixes:
+  asti: https://w3id.org/phases/assessment/gerotranscendance/asti/
+  linkml: https://w3id.org/linkml/
+  schema: http://schema.org/
+  PATO: http://purl.obolibrary.org/obo/PATO_    # Ontology for phenotypic qualities
+  NBO: http://purl.obolibrary.org/obo/NBO_     # Example: National Biomedical Ontology (replace if not appropriate)
+  MFOEM: http://purl.obolibrary.org/obo/MFOEM_ # Example: Mental Functioning Ontology (replace if not appropriate)
+  RO: http://purl.obolibrary.org/obo/RO_       # Relation Ontology
+  TIME: http://purl.obolibrary.org/obo/TIME_   # Time Ontology in OWL
+  # Consider adding OBI: http://purl.obolibrary.org/obo/OBI_ for assessment-related terms
+
+default_prefix: asti
+default_range: string
+
+imports:
+  - linkml:types
+
+classes:
+  ASTIAssessment:
+    description: >-
+      An assessment instance using the Adult Self-Transcendence Inventory.
+    slots:
+      - assessment_id
+      - subject # Renamed from subject_id for clarity, range Person
+      - assessment_date
+      - responses
+      - total_score
+      - evaluator # Range Person
+    class_uri: schema:MedicalTest # Or consider OBI:0000070 'assessment'
+
+  ASTIResponses:
+    description: >-
+      The set of responses to the 18 questions in the ASTI instrument for a single assessment.
+    slots:
+      # ASTI Questions - responses are on a 4-point Likert scale (1-4)
+      - item_1
+      - item_2
+      - item_3
+      - item_4  # Reverse-scored
+      - item_5
+      - item_6
+      - item_7
+      - item_8  # Reverse-scored
+      - item_9  # Reverse-scored
+      - item_10 # Reverse-scored
+      - item_11
+      - item_12
+      - item_13
+      - item_14 # Reverse-scored
+      - item_15
+      - item_16
+      - item_17 # Reverse-scored
+      - item_18
+
+  Person:
+    description: >-
+      A person involved in the assessment, either as the subject being assessed or the evaluator.
+    slots:
+      - person_id
+      - name
+      - age
+      - gender
+    class_uri: schema:Person
+
+slots:
+  # ASTIAssessment slots
+  assessment_id:
+    description: Unique identifier for this specific ASTI assessment instance.
+    identifier: true
+    range: string
+    required: true
+    slot_uri: schema:identifier # Or a more specific identifier from an application ontology
+
+  subject:
+    description: The person who is the subject of the assessment.
+    range: Person # Links to the Person class
+    required: true
+    slot_uri: schema:subjectOf # This implies the assessment is the subject of the person, consider RO:0002234 'has_participant' for the assessment having a participant (subject)
+                               # or schema:patient if context is clinical
+
+  assessment_date:
+    description: Date when the assessment was conducted.
+    range: date
+    required: true
+    slot_uri: schema:dateCreated # Or schema:startTime, OBI:0000312 'has specified output date'
+
+  responses:
+    description: The complete set of responses provided by the subject for this ASTI assessment.
+    range: ASTIResponses # Links to the ASTIResponses class
+    required: true
+
+  total_score:
+    description: Total calculated score for the ASTI assessment after accounting for reverse-scored items.
+    range: integer
+    slot_uri: schema:result # Or OBI:0000047 'has specified value' if part of a larger result structure
+
+  evaluator:
+    description: Person who administered or evaluated the assessment (if applicable).
+    range: Person # Links to the Person class
+    slot_uri: schema:performer # Or RO:0002233 'has_agent'
+
+  # ASTIResponses item slots (actual responses to questions)
+  # Each item corresponds to a statement from the ASTI.
+  # The range for each is ASTILikertScale.
+  # Remember to replace placeholder NBO/MFOEM slot_uris with actual ontology terms representing the core concept of the question.
+
+  item_1:
+    description: "Response to: I am more likely to engage in quiet contemplation."
+    range: ASTILikertScale
+    slot_uri: asti:item_1_response # Using local prefix for clarity; map to ontology if a direct concept exists for this question's theme
+                                  # e.g., map to a concept related to 'contemplation'
+  item_2:
+    description: "Response to: I feel that my individual life is a part of a greater whole."
+    range: ASTILikertScale
+    slot_uri: asti:item_2_response # e.g., map to 'connectedness' or 'sense of belonging to universe'
+
+  item_3:
+    description: "Response to: I have become less concerned about other people's opinions of me."
+    range: ASTILikertScale
+    slot_uri: asti:item_3_response # e.g., map to 'independence from social evaluation'
+
+  item_4:
+    description: "Response to: I feel that my life has less meaning."
+    range: ASTILikertScale
+    notes: This item is reverse-scored.
+    slot_uri: asti:item_4_response # e.g., map to 'perception of life meaning' (note the negative phrasing)
+
+  item_5:
+    description: "Response to: I am more focused on the present."
+    range: ASTILikertScale
+    slot_uri: asti:item_5_response # e.g., map to 'present-moment focus' or 'mindfulness'
+
+  item_6:
+    description: "Response to: I feel a greater sense of belonging with both earlier and future generations."
+    range: ASTILikertScale
+    slot_uri: asti:item_6_response # e.g., map to 'intergenerational connectedness'
+
+  item_7:
+    description: "Response to: My peace of mind is not so easily upset as it used to be."
+    range: ASTILikertScale
+    slot_uri: asti:item_7_response # e.g., map to 'emotional equanimity' or 'resilience'
+
+  item_8:
+    description: "Response to: I feel more isolated and lonely."
+    range: ASTILikertScale
+    notes: This item is reverse-scored.
+    slot_uri: asti:item_8_response # e.g., map to 'feeling of isolation' or 'loneliness'
+
+  item_9:
+    description: "Response to: I am less interested in seeking out social contacts."
+    range: ASTILikertScale
+    notes: This item is reverse-scored.
+    slot_uri: asti:item_9_response # e.g., map to 'social withdrawal' or 'preference for solitude' (distinguish from loneliness)
+
+  item_10:
+    description: "Response to: My sense of self has decreased as I have gotten older."
+    range: ASTILikertScale
+    notes: This item is reverse-scored.
+    slot_uri: asti:item_10_response # e.g., map to 'sense of self strength' (note negative phrasing)
+
+  item_11:
+    description: "Response to: My sense of self is less dependent on other people and things."
+    range: ASTILikertScale
+    slot_uri: asti:item_11_response # e.g., map to 'self-autonomy' or 'non-attachment'
+
+  item_12:
+    description: "Response to: I do not become angry as easily."
+    range: ASTILikertScale
+    slot_uri: asti:item_12_response # e.g., map to 'anger regulation' or 'reduced irritability'
+
+  item_13:
+    description: "Response to: I take myself less seriously."
+    range: ASTILikertScale
+    slot_uri: asti:item_13_response # e.g., map to 'self-detachment' or 'humility'
+
+  item_14:
+    description: "Response to: I have less patience with other people."
+    range: ASTILikertScale
+    notes: This item is reverse-scored.
+    slot_uri: asti:item_14_response # e.g., map to 'patience' (note negative phrasing)
+
+  item_15:
+    description: "Response to: I find more joy in life."
+    range: ASTILikertScale
+    slot_uri: asti:item_15_response # e.g., map to 'experience of joy'
+
+  item_16:
+    description: "Response to: Material things mean less to me."
+    range: ASTILikertScale
+    slot_uri: asti:item_16_response # e.g., map to 'materialism' (inverse) or 'value of non-material things'
+
+  item_17:
+    description: "Response to: I am less optimistic about the future of humanity."
+    range: ASTILikertScale
+    notes: This item is reverse-scored.
+    slot_uri: asti:item_17_response # e.g., map to 'optimism about humanity' (note negative phrasing)
+
+  item_18:
+    description: "Response to: I feel much more compassionate, even toward my enemies."
+    range: ASTILikertScale
+    slot_uri: asti:item_18_response # e.g., map to 'compassion' or 'universal love'
+
+  # Person attributes
+  person_id:
+    description: Unique identifier for a person (subject or evaluator).
+    identifier: true # This makes person_id an identifier for the Person class
+    range: string
+    required: true # If every person must have an ID
+    slot_uri: schema:identifier
+
+  name:
+    description: Full name of the person.
+    range: string
+    slot_uri: schema:name
+
+  age:
+    description: Age of the person in years at the time of assessment or when recorded.
+    range: integer # Consider 'duration' if you need more precision or use with TIME ontology
+    slot_uri: schema:age # PATO:0000011 'age'
+
+  gender:
+    description: Gender of the person.
+    range: string # Consider using an enum or mapping to specific ontology terms for gender/sex
+    slot_uri: schema:gender # PATO:0000047 'gender'
+
+enums:
+  ASTILikertScale:
+    description: >-
+      A 4-point Likert scale from 'Disagree Strongly' (1) to 'Agree Strongly' (4) used in the ASTI.
+      Values are numeric strings.
+    permissible_values:
+      "1": # Actual value stored in data
+        text: "Disagree strongly"
+        description: "Corresponds to a score of 1."
+        meaning: PATO:0001320 # 'strongly decreased intensity' (example, find best fit)
+      "2":
+        text: "Disagree somewhat" # Textual label for value 2
+        description: "Corresponds to a score of 2."
+        meaning: PATO:0000460 # 'decreased intensity' (example)
+      "3":
+        text: "Agree somewhat"
+        description: "Corresponds to a score of 3."
+        meaning: PATO:0000469 # 'increased intensity' (example)
+      "4":
+        text: "Agree strongly"
+        description: "Corresponds to a score of 4."
+        meaning: PATO:0001321 # 'strongly increased intensity' (example)
