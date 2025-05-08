@@ -11,6 +11,9 @@ on:
     paths:
       - 'mkdocs.yml' # Only trigger if the mkdocs.yml file changes
       - src/schemass/asti_schema.yaml
+      - 'src/docs/*.md'
+      - 'src/docs/*.html'
+      - 'docs/images/*'
       # Add other paths that trigger documentation rebuild if needed
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -25,12 +28,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4 
+      - uses: actions/checkout@v4
 
       - name: Configure Git Credentials
         run: |
-          git config user.name github-actions[bot]
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -52,16 +55,19 @@ jobs:
           pip install -r requirements.txt
 
       # --- Build the MkDocs site ---
-      # This step will generate the static site files in the 'site/' directory by default
+      # # This step will generate the static site files in the 'site/' directory by default
       - name: Build MkDocs site
         run: |
           make gendoc
-        # Alternatively, if not using make: mkdocs build
+      #   # Alternatively, if not using make: mkdocs build
 
-      # --- Deploy the built site to the gh-pages branch ---
-      # This replaces the actions/deploy-pages step
-      - name: Deploy MkDocs site to gh-pages
+      - name: Deploy MkDocs site to gh-pages manually
         run: |
-          mkdocs gh-deploy --force
-        # The --force flag will create the gh-pages branch if it doesn't exist
-        # and overwrite its contents with the built site.
+          git fetch
+          git switch --orphan gh-pages
+          git rm -rf . > /dev/null 2>&1 || true
+          cp -r site/* .
+          touch .nojekyll
+          git add .
+          git commit -m "Deploy MkDocs site from GitHub Actions"
+          git push origin gh-pages --force
