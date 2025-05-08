@@ -10,8 +10,8 @@ prefixes:
   linkml: https://w3id.org/linkml/
   schema: http://schema.org/
   PATO: http://purl.obolibrary.org/obo/PATO_    # Ontology for phenotypic qualities
-  NBO: http://purl.obolibrary.org/obo/NBO_     # Example: National Biomedical Ontology (replace if not appropriate)
-  MFOEM: http://purl.obolibrary.org/obo/MFOEM_ # Example: Mental Functioning Ontology (replace if not appropriate)
+  NBO: http://purl.obolibrary.org/obo/NBO_     # Example: National Biomedical Ontology
+  MFOEM: http://purl.obolibrary.org/obo/MFOEM_ # Example: Mental Functioning Ontology
   RO: http://purl.obolibrary.org/obo/RO_       # Relation Ontology
   TIME: http://purl.obolibrary.org/obo/TIME_   # Time Ontology in OWL
   # Consider adding OBI: http://purl.obolibrary.org/obo/OBI_ for assessment-related terms
@@ -33,7 +33,7 @@ classes:
       - responses
       - total_score
       - evaluator # Range Person
-    class_uri: schema:MedicalTest # Or consider OBI:0000070 'assessment'
+    class_uri: schema:MedicalTest
 
   ASTIResponses:
     description: >-
@@ -236,19 +236,19 @@ enums:
       A 4-point Likert scale from 'Disagree Strongly' (1) to 'Agree Strongly' (4) used in the ASTI.
       Values are numeric strings.
     permissible_values:
-      "1": # Actual value stored in data
-        text: "Disagree strongly"
+      "Disagree strongly": # Actual value stored in data
         description: "Corresponds to a score of 1."
-        meaning: PATO:0001320 # 'strongly decreased intensity' (example, find best fit)
-      "2":
-        text: "Disagree somewhat" # Textual label for value 2
+        rank: 1
+        meaning: NCIT:C103506 # 'strongly decreased intensity' (example, find best fit)
+      "Disagree somewhat":
         description: "Corresponds to a score of 2."
-        meaning: PATO:0000460 # 'decreased intensity' (example)
-      "3":
-        text: "Agree somewhat"
+        rank: 2
+        meaning: NCIT:C91291 # 'decreased intensity' (example)
+      "Agree somewhat":
         description: "Corresponds to a score of 3."
-        meaning: PATO:0000469 # 'increased intensity' (example)
-      "4":
-        text: "Agree strongly"
+        rank: 3
+        meaning: NCIT:C91292 # 'increased intensity' (example)
+      "Agree strongly":
         description: "Corresponds to a score of 4."
-        meaning: PATO:0001321 # 'strongly increased intensity' (example)
+        rank: 4
+        meaning: NCIT:C91293 # 'strongly increased intensity' (example)
