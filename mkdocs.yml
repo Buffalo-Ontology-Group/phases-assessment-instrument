@@ -1,9 +1,25 @@
 site_name: Phases Assessment Instrument
+site_url: https://buffalo-ontology-group.github.io/phases-assessment-instrument/
+repo_url: https://github.com/Buffalo-Ontology-Group/phases-assessment-instrument
 site_description: A tool for assessing the phases of a project.
+
+plugins:
+  - search
+  - mermaid2:
+      version: 10.9.0
+  - redirects: # reference: https://github.com/mkdocs/mkdocs-redirects
+      redirect_maps:
+        'home.md': 'index.md'  # redirects "/home" to "/"
+markdown_extensions:
+  - admonition
+  - tables
+  - pymdownx.magiclink
+extra_javascript:
+  - https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js
+  - javascripts/tablesort.js
+
 theme:
   name: material
+
 nav:
-  - Home: index.md
-  - ASTI Schema:
-    - Overview: schema/asti_schema_overview.md
-    - Classes: schema/asti_classes.md
+  - Phases Assessment Instrument: index.md
