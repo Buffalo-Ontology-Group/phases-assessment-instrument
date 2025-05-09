@@ -5,9 +5,6 @@ site_description: A tool for assessing the phases of a project.
 
 plugins:
   - search
-  - redirects: # reference: https://github.com/mkdocs/mkdocs-redirects
-      redirect_maps:
-        'home.md': 'index.md'  # redirects "/home" to "/"
 markdown_extensions:
   - admonition
   - tables
