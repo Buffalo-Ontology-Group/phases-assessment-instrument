@@ -10,7 +10,7 @@ on:
       - main  # Or 'master' if that's your default branch
     paths:
       - 'mkdocs.yml' # Only trigger if the mkdocs.yml file changes
-      - src/schemass/asti_schema.yaml
+      - src/schema/asti_schema.yaml
       - 'src/docs/*.md'
       - 'src/docs/*.html'
       - 'docs/images/*'
@@ -61,13 +61,10 @@ jobs:
           make gendoc
       #   # Alternatively, if not using make: mkdocs build
 
-      - name: Deploy MkDocs site to gh-pages manually
+      - name: Deploy MkDocs site to gh-pages
         run: |
-          git fetch
-          git switch --orphan gh-pages
-          git rm -rf . > /dev/null 2>&1 || true
-          cp -r site/* .
-          touch .nojekyll
-          git add .
-          git commit -m "Deploy MkDocs site from GitHub Actions"
-          git push origin gh-pages --force
+          mkdir -p docs
+          mkdir -p docs/images
+          touch docs/.nojekyll
+          make gendoc
+          mkdocs gh-deploy --force
