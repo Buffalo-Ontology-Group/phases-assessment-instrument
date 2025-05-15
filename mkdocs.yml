@@ -5,6 +5,13 @@ site_description: A tool for assessing the phases of a project.
 
 plugins:
   - search
+  - mermaid2:
+      version: 10.9.0
+  - redirects: # reference: https://github.com/mkdocs/mkdocs-redirects
+      redirect_maps:
+        'home.md': 'index.md'  # redirects "/home" to "/"
+        'ASTI_Schema.md': 'asti_schema.md'
+        'schema.md': 'asti_schema.md'
 markdown_extensions:
   - admonition
   - tables

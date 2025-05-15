@@ -1,0 +1,218 @@
+# LinkML Schema for STE Trait - Often Assessment
+
+id: https://w3id.org/phases/assessment/transcendence/ste-trait-often # Proposed unique ID for this schema
+name: ste-trait-often-schema
+title: Self-Transcendence Experience (STE) Trait - Often Assessment Schema
+description: >-
+  LinkML schema for capturing data from an instance of the STE Trait - Often scale.
+  This scale assesses how often an individual reports having self-transcendent experiences,
+  using a 7-point Likert scale. Items are typically randomized during administration.
+
+prefixes:
+  ste: https://w3id.org/phases/assessment/transcendence/ste-trait-often/ # Schema-specific prefix
+  linkml: https://w3id.org/linkml/
+  schema: http://schema.org/
+  # Add other relevant ontology prefixes if needed (e.g., for concepts related to self-transcendence)
+  # OBI: http://purl.obolibrary.org/obo/OBI_
+  # MFOEM: http://purl.obolibrary.org/obo/MFOEM_
+
+default_prefix: ste
+default_range: string
+
+imports:
+  - linkml:types
+
+classes:
+  STEAssessment:
+    description: >-
+      An assessment instance using the STE Trait - Often scale.
+      Note: Items 1-10 are typically presented in a randomized order during administration.
+    slots:
+      - assessment_id
+      - subject        # Range: Person
+      - assessment_date
+      - responses      # Range: STEResponses
+      - self_loss_subscale_score # Calculated from items 1-5
+      - unity_subscale_score     # Calculated from items 6-10
+      - total_score              # Calculated from items 1-10
+      - evaluator      # Optional, Range: Person
+    class_uri: schema:MedicalTest # Or OBI:0000070 'assessment'
+
+  STEResponses:
+    description: >-
+      The set of responses to the 10 questions in the STE Trait - Often instrument for a single assessment.
+    slots:
+      # STE Items - responses are on a 7-point Likert scale (1-7)
+      # Self-Loss Sub-Scale Items (1-5)
+      - item_1
+      - item_2
+      - item_3
+      - item_4
+      - item_5
+      # Unity Sub-Scale Items (6-10)
+      - item_6
+      - item_7
+      - item_8
+      - item_9
+      - item_10
+
+  Person:
+    description: >-
+      A person involved in the assessment, either as the subject being assessed or the evaluator.
+    slots:
+      - person_id
+      - name
+      - age
+      - gender
+    class_uri: schema:Person
+
+slots:
+  # STEAssessment slots
+  assessment_id:
+    description: Unique identifier for this specific STE Trait - Often assessment instance.
+    identifier: true
+    range: string
+    required: true
+    slot_uri: schema:identifier
+
+  subject:
+    description: The person who is the subject of the assessment.
+    range: Person # Links to the Person class
+    required: true
+    slot_uri: schema:subjectOf # Consider RO:0002234 'has_participant'
+
+  assessment_date:
+    description: Date when the assessment was conducted.
+    range: date
+    required: true
+    slot_uri: schema:dateCreated # Or OBI:0000312 'has specified output date'
+
+  responses:
+    description: The complete set of responses provided by the subject for this STE assessment.
+    range: STEResponses # Links to the STEResponses class
+    required: true
+
+  self_loss_subscale_score:
+    description: >-
+      Calculated score for the Self-Loss sub-scale (sum of items 1-5).
+      Range: 5 to 35.
+    range: integer
+    slot_uri: schema:result # Consider a more specific derived value term
+
+  unity_subscale_score:
+    description: >-
+      Calculated score for the Unity sub-scale (sum of items 6-10).
+      Range: 5 to 35.
+    range: integer
+    slot_uri: schema:result # Consider a more specific derived value term
+
+  total_score:
+    description: >-
+      Total calculated score for the STE assessment (sum of all 10 items).
+      Range: 10 to 70.
+    range: integer
+    slot_uri: schema:result # Consider OBI:0001968 'aggregate score'
+
+  evaluator:
+    description: Person who administered or evaluated the assessment (if applicable).
+    range: Person # Links to the Person class
+    slot_uri: schema:performer # Or RO:0002233 'has_agent'
+
+  # STEResponses item slots
+  # Range for all items is STE7PointLikertScale. No items are reverse-scored.
+
+  item_1:
+    description: "Response to: I often have experiences in which I temporarily do not notice my sense of self at all."
+    range: STE7PointLikertScale
+    slot_uri: ste:item_1_response # Map to ontology concept for 'temporary loss of self-awareness' if available
+  item_2:
+    description: "Response to: I often have experiences in which, for a moment, I lose my sense of self."
+    range: STE7PointLikertScale
+    slot_uri: ste:item_2_response # Map to ontology concept for 'momentary self-loss'
+  item_3:
+    description: "Response to: I often have experiences in which my sense of self completely fades away."
+    range: STE7PointLikertScale
+    slot_uri: ste:item_3_response # Map to ontology concept for 'complete fading of self'
+  item_4:
+    description: "Response to: I often have experiences in which my self boundaries temporarily fade away."
+    range: STE7PointLikertScale
+    slot_uri: ste:item_4_response # Map to ontology concept for 'fading self-boundaries'
+  item_5:
+    description: "Response to: I often have experiences in which my sense of self feels much smaller."
+    range: STE7PointLikertScale
+    slot_uri: ste:item_5_response # Map to ontology concept for 'diminished sense of self'
+  item_6:
+    description: "Response to: I often have experiences of feeling closely connected to everything."
+    range: STE7PointLikertScale
+    slot_uri: ste:item_6_response # Map to ontology concept for 'connectedness to everything'
+  item_7:
+    description: "Response to: I often have experiences in which I am completely part of something larger than myself."
+    range: STE7PointLikertScale
+    slot_uri: ste:item_7_response # Map to ontology concept for 'being part of a larger whole'
+  item_8:
+    description: "Response to: I often have experiences in which I feel a deep sense of communion with all living things."
+    range: STE7PointLikertScale
+    slot_uri: ste:item_8_response # Map to ontology concept for 'communion with living things'
+  item_9:
+    description: "Response to: I often have experiences of feeling entirely connected to humanity."
+    range: STE7PointLikertScale
+    slot_uri: ste:item_9_response # Map to ontology concept for 'connectedness to humanity'
+  item_10:
+    description: "Response to: I often have experiences in which I feel a deep sense of oneness with all things."
+    range: STE7PointLikertScale
+    slot_uri: ste:item_10_response # Map to ontology concept for 'oneness with all things'
+
+  # Person attributes (reused from previous schema)
+  person_id:
+    description: Unique identifier for a person (subject or evaluator).
+    identifier: true
+    range: string
+    required: true
+    slot_uri: schema:identifier
+  name:
+    description: Full name of the person.
+    range: string
+    slot_uri: schema:name
+  age:
+    description: Age of the person in years at the time of assessment or when recorded.
+    range: integer
+    slot_uri: schema:age # PATO:0000011 'age'
+  gender:
+    description: Gender of the person.
+    range: string # Consider enum or ontology terms
+    slot_uri: schema:gender # PATO:0000047 'gender'
+
+enums:
+  STE7PointLikertScale:
+    description: >-
+      A 7-point Likert scale from 'Completely Disagree' (1) to 'Completely Agree' (7)
+      used in the STE Trait - Often scale.
+    permissible_values:
+      "Completely Disagree":
+        description: "Corresponds to a score of 1."
+        rank: 1
+        # meaning: # Map to appropriate ontology term if desired
+      "Strongly Disagree":
+        description: "Corresponds to a score of 2."
+        rank: 2
+        # meaning:
+      "Somewhat Disagree":
+        description: "Corresponds to a score of 3."
+        rank: 3
+        # meaning:
+      "Neutral":
+        description: "Corresponds to a score of 4."
+        rank: 4
+        # meaning:
+      "Somewhat Agree":
+        description: "Corresponds to a score of 5."
+        rank: 5
+        # meaning:
+      "Strongly Agree":
+        description: "Corresponds to a score of 6."
+        rank: 6
+        # meaning:
+      "Completely Agree":
+        description: "Corresponds to a score of 7."
+        rank: 7
+        # meaning:
