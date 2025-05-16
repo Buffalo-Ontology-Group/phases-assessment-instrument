@@ -10,10 +10,12 @@ on:
       - main  # Or 'master' if that's your default branch
     paths:
       - 'mkdocs.yml' # Only trigger if the mkdocs.yml file changes
-      - src/schema/asti_schema.yaml
+      - src/schema/**.yaml
       - 'src/docs/*.md'
       - 'src/docs/*.html'
       - 'docs/images/*'
+      - Makefile
+      - requirements.txt
       # Add other paths that trigger documentation rebuild if needed
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:

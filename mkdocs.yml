@@ -25,4 +25,4 @@ theme:
 
 nav:
   - Phases Assessment Instrument: index.md
-  - ASTI Schema: asti_schema.md
+  - ASTI Schema: asti-assessment-schema/index.md
