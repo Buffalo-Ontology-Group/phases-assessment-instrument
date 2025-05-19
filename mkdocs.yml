@@ -20,9 +20,6 @@ extra_javascript:
   - https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js
   - javascripts/tablesort.js
 
-theme:
-  name: material
-
 nav:
-  - Phases Assessment Instrument: index.md
-  - ASTI Schema: asti-assessment-schema/index.md
+  - Home: index.md
+  - ASTI Schema: asti_schema.md

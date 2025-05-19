@@ -35,7 +35,7 @@ ifneq ($(wildcard src/docs/images/*.*),)
 	cp src/docs/images/*.* docs/images
 endif
 # generate documentation
-	gen-doc -d $(DOCSDIR) $(ASTI_SCHEMA)
+	gen-doc -d $(DOCSDIR) -o asti_schema.md $(ASTI_SCHEMA)
 
 ## remove docs
 clean-docs:
