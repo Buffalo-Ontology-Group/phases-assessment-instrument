@@ -4,6 +4,8 @@ SRC = src
 SCHEMA_DIR = $(SRC)/schema
 ASTI_SCHEMA = $(SCHEMA_DIR)/asti_schema.yaml
 ASTI_DOCS_DIR = $(DOCSDIR)/asti
+STE_SCHEMA = $(SCHEMA_DIR)/ste_schema.yaml
+STE_DOCS_DIR = $(DOCSDIR)/ste
 
 # --- linkml products --- #
 asti-jsonschema: $(ASTI_SCHEMA)
@@ -13,6 +15,9 @@ asti-owl: $(ASTI_SCHEMA)
 	gen-owl $< > temp/asti.tmp.ttl 
 	src/scripts/pun-annotations-to-ttl.py $< > temp/pun.tmp.ttl 
 	robot merge -i temp/asti.tmp.ttl -i temp/pun.tmp.ttl -o owl/asti.ttl 
+
+ste-jsonschema: $(STE_SCHEMA)
+	gen-json-schema $< > jsonschema/ste_schema.json
 
 ## remove products
 clean-products:
@@ -36,7 +41,9 @@ ifneq ($(wildcard src/docs/images/*.*),)
 endif
 # generate documentation
 	gen-doc -d $(DOCSDIR) $(ASTI_SCHEMA)
-	mv $(DOCSDIR)/index.md $(DOCSDIR)/asti_schema.md
+	if [ -f $(DOCSDIR)/index.md ]; then \
+		mv $(DOCSDIR)/index.md $(DOCSDIR)/asti_schema.md; \
+	fi
 
 ## remove docs
 clean-docs:
