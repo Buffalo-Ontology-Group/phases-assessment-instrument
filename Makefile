@@ -30,19 +30,19 @@ clean-products:
 
 # --- schema documentation --- #
 gendoc: $(DOCSDIR)
-# copy existing files (if they exist) 
-# note: there is no space after the ',' in ($(wildcard src/docs/*.md),)
-# condition is the true if the wildcard returns non-empty content (i.e, not equal)
-ifneq ($(wildcard src/docs/*.md),)
-	cp src/docs/*.md docs/
-endif
-ifneq ($(wildcard src/docs/images/*.*),)
-	cp src/docs/images/*.* docs/images
-endif
-# generate documentation
+	# Step 1: Backup homepage if it exists
+	if [ -f $(DOCSDIR)/index.md ]; then \
+		cp $(DOCSDIR)/index.md $(DOCSDIR)/_home.md; \
+	fi
+	# Step 2: Generate schema docs
 	gen-doc -d $(DOCSDIR) $(ASTI_SCHEMA)
+	# Step 3: Rename generated schema doc if needed
 	if [ -f $(DOCSDIR)/index.md ]; then \
 		mv $(DOCSDIR)/index.md $(DOCSDIR)/asti_schema.md; \
+	fi
+	# Step 4: Restore homepage
+	if [ -f $(DOCSDIR)/_home.md ]; then \
+		mv $(DOCSDIR)/_home.md $(DOCSDIR)/index.md; \
 	fi
 
 ## remove docs
