@@ -34,11 +34,14 @@ gendoc: $(DOCSDIR)
 	if [ -f $(DOCSDIR)/index.md ]; then \
 		cp $(DOCSDIR)/index.md $(DOCSDIR)/_home.md; \
 	fi
-	# Step 2: Generate schema docs
+	# Step 2: Generate schema docs and Rename generated schema doc if needed
 	gen-doc -d $(DOCSDIR) $(ASTI_SCHEMA)
-	# Step 3: Rename generated schema doc if needed
 	if [ -f $(DOCSDIR)/index.md ]; then \
 		mv $(DOCSDIR)/index.md $(DOCSDIR)/asti_schema.md; \
+	fi
+	gen-doc -d $(DOCSDIR) $(STE_SCHEMA)
+	if [ -f $(DOCSDIR)/index.md ]; then \
+		mv $(DOCSDIR)/index.md $(DOCSDIR)/ste_schema.md; \
 	fi
 	# Step 4: Restore homepage
 	if [ -f $(DOCSDIR)/_home.md ]; then \
