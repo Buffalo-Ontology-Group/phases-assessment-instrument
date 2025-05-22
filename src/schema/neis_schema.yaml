@@ -1,0 +1,256 @@
+id: https://w3id.org/example/neis_assessment_schema # Unique URI for this schema
+name: neis-assessment-schema # Schema name for tools and code generation
+title: NEIS Assessment Schema # Human-readable title
+description: >-
+  LinkML schema for capturing data from an instance of the Noetic Experiences and Integration Scale (NEIS) instrument.
+  This schema is modeled after the ASTI assessment schema structure.
+
+prefixes:
+  neis: https://w3id.org/example/neis_assessment_schema/terms/ # Prefix for terms specific to this NEIS schema
+  linkml: https://w3id.org/linkml/
+  schema: http://schema.org/ # For common vocabulary terms like Person, identifier, dateCreated
+  # Add other relevant ontology prefixes if needed, e.g., for specific psychological constructs
+  # PATO: http://purl.obolibrary.org/obo/PATO_
+  # OBI: http://purl.obolibrary.org/obo/OBI_
+
+default_prefix: neis
+default_range: string # Default type for slots if not otherwise specified
+
+imports:
+  - linkml:types # Imports standard LinkML data types (string, integer, boolean, date, etc.)
+
+classes:
+  NEISAssessment:
+    name: NEISAssessment # Name for code generation
+    description: >-
+      An assessment instance using the Noetic Experiences and Integration Scale (NEIS).
+    slots:
+      - assessment_id
+      - subject         # The person being assessed
+      - assessment_date
+      - responses       # The set of answers to the NEIS questions
+      - total_score     # Placeholder for a calculated total score
+      - evaluator       # The person who administered or evaluated the assessment
+    class_uri: schema:MedicalTest # Or a more specific URI if available, e.g., from OBI for psychological assessment
+
+  NEISResponses:
+    name: NEISResponses # Name for code generation
+    description: >-
+      The set of responses to the 15 questions in the NEIS instrument for a single assessment.
+    slots:
+      # NEIS Questions - responses are on a 6-point Likert scale (NEISLikertScale)
+      - neis_item_1
+      - neis_item_2
+      - neis_item_3
+      - neis_item_4
+      - neis_item_5
+      - neis_item_6
+      - neis_item_7
+      - neis_item_8
+      - neis_item_9 
+      - neis_item_10
+      - neis_item_11
+      - neis_item_12
+      - neis_item_13
+      - neis_item_14
+      - neis_item_15
+
+  Person: # Copied from ASTI example for consistency
+    name: Person # Name for code generation
+    description: >-
+      A person involved in the assessment, either as the subject being assessed or the evaluator.
+    slots:
+      - person_id
+      - name
+      - age
+      - gender
+    class_uri: schema:Person
+
+slots:
+  # NEISAssessment slots
+  assessment_id:
+    description: Unique identifier for this specific NEIS assessment instance.
+    identifier: true # Marks this slot as the primary key for NEISAssessment
+    range: string
+    required: true
+    slot_uri: schema:identifier
+
+  subject:
+    description: The person who is the subject of the NEIS assessment.
+    range: Person # Links to the Person class
+    required: true
+    slot_uri: schema:subjectOf # Could also use OBI:0000293 'has_specified_input' or a more specific patient/subject role
+
+  assessment_date:
+    description: Date when the NEIS assessment was conducted or data was recorded.
+    range: date
+    required: true
+    slot_uri: schema:dateCreated # Or schema:startTime, OBI:0000312 'has specified output date'
+
+  responses:
+    description: The complete set of responses provided by the subject for this NEIS assessment.
+    range: NEISResponses # Links to the NEISResponses class
+    required: true
+    # inlined: true # Consider if NEISResponses should be inlined or a separate object reference
+
+  total_score:
+    description: >-
+      Total calculated score for the NEIS assessment. The method for calculation
+      (e.g., sum of item scores, handling of any reverse-scored items if they existed)
+      would be defined by the instrument's scoring guidelines.
+    range: integer
+    required: false # Score might be calculated later or not at all
+    slot_uri: schema:result # Or OBI:0000047 'has specified value'
+
+  evaluator:
+    description: Person who administered, scored, or evaluated the NEIS assessment (if applicable).
+    range: Person # Links to the Person class
+    required: false # Not always applicable
+    slot_uri: schema:performer # Or a more specific role like OBI:0000093 'has_agent'
+
+  # NEISResponses item slots (actual responses to questions)
+  # Each item corresponds to a statement from the NEIS.
+  # The range for each is NEISLikertScale.
+  # slot_uri uses local 'neis:' prefix; map to existing ontologies if suitable terms for question themes exist.
+
+  neis_item_1:
+    description: "Response to: I appreciate the value of all my experiences."
+    range: NEISLikertScale
+    required: false # Individual items might be skipped
+    slot_uri: neis:item_1_response
+
+  neis_item_2:
+    description: "Response to: It pains me to think about dreams and goals l have had that I did not fulfill."
+    range: NEISLikertScale
+    required: false
+    slot_uri: neis:item_2_response
+
+  neis_item_3:
+    description: "Response to: I have accomplished everything I wanted to in my life."
+    range: NEISLikertScale
+    required: false
+    slot_uri: neis:item_3_response
+
+  neis_item_4:
+    description: "Response to: Life is meaningful."
+    range: NEISLikertScale
+    required: false
+    slot_uri: neis:item_4_response
+
+  neis_item_5:
+    description: "Response to: I wish I had loved more in my life."
+    range: NEISLikertScale
+    required: false
+    slot_uri: neis:item_5_response
+
+  neis_item_6:
+    description: "Response to: I have reached a point where I can accept the events in my life as having been necessary."
+    range: NEISLikertScale
+    required: false
+    slot_uri: neis:item_6_response
+
+  neis_item_7:
+    description: "Response to: As I grow older, I understand people more."
+    range: NEISLikertScale
+    required: false
+    slot_uri: neis:item_7_response
+
+  neis_item_8:
+    description: "Response to: I am bothered by mistakes I have made in the past."
+    range: NEISLikertScale
+    required: false
+    slot_uri: neis:item_8_response
+
+  neis_item_9:
+    description: "Response to: I have done exactly what I wanted to with my life."
+    range: NEISLikertScale
+    required: false
+    slot_uri: neis:item_9_response
+
+  neis_item_10:
+    description: "Response to: I see a meaningful thread running through the many events in my life."
+    range: NEISLikertScale
+    required: false
+    slot_uri: neis:item_10_response
+
+  neis_item_11:
+    description: "Response to: Had I been born with a different personality, life would have been better."
+    range: NEISLikertScale
+    required: false
+    slot_uri: neis:item_11_response
+
+  neis_item_12:
+    description: "Response to: I can face death gracefully."
+    range: NEISLikertScale
+    required: false
+    slot_uri: neis:item_12_response
+
+  neis_item_13:
+    description: "Response to: Even my sufferings have had meaning."
+    range: NEISLikertScale
+    required: false
+    slot_uri: neis:item_13_response
+
+  neis_item_14:
+    description: "Response to: I wish I had more time to take a different path in life."
+    range: NEISLikertScale
+    required: false
+    slot_uri: neis:item_14_response
+
+  neis_item_15:
+    description: "Response to: As I get older, my life story makes more sense to me."
+    range: NEISLikertScale
+    required: false
+    slot_uri: neis:item_15_response
+
+  # Person attributes (copied from ASTI example)
+  person_id:
+    description: Unique identifier for a person (e.g., subject or evaluator).
+    identifier: true # Marks this as the primary key for the Person class
+    range: string
+    required: true # Assuming every person instance must have an ID
+    slot_uri: schema:identifier
+
+  name:
+    description: Full name of the person.
+    range: string
+    required: false
+    slot_uri: schema:name
+
+  age:
+    description: Age of the person in years, typically at the time of assessment or when their record was created.
+    range: integer
+    required: false
+    slot_uri: schema:age # Could also map to PATO:0000011 'age'
+
+  gender:
+    description: Gender of the person. Consider using a controlled vocabulary or enum for more structured data.
+    range: string # Or an enum for gender options
+    required: false
+    slot_uri: schema:gender # Could also map to PATO:0000047 'gender'
+
+enums:
+  NEISLikertScale:
+    name: NEISLikertScale # Name for code generation
+    description: >-
+      A 6-point Likert scale used in the NEIS instrument, ranging from
+      '1 - Strongly Disagree' to '6 - Strongly Agree'.
+    permissible_values:
+      "Strongly Disagree":
+        description: "Corresponds to a score of 1."
+        rank: 1 # Optional: if explicit ordering or numerical value is needed beyond text
+      "Disagree":
+        description: "Corresponds to a score of 2."
+        rank: 2
+      "Slightly Disagree":
+        description: "Corresponds to a score of 3."
+        rank: 3
+      "Slightly Agree":
+        description: "Corresponds to a score of 4."
+        rank: 4
+      "Agree":
+        description: "Corresponds to a score of 5."
+        rank: 5
+      "Strongly Agree":
+        description: "Corresponds to a score of 6."
+        rank: 6
