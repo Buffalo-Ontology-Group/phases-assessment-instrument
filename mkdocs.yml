@@ -25,3 +25,4 @@ extra_javascript:
 nav:
   - ASTI Schema: asti_schema.md
   - STE Schema: ste_schema.md
+  - NEIS Schema: neis_schema.md

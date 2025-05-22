@@ -6,6 +6,8 @@ ASTI_SCHEMA = $(SCHEMA_DIR)/asti_schema.yaml
 ASTI_DOCS_DIR = $(DOCSDIR)/asti
 STE_SCHEMA = $(SCHEMA_DIR)/ste_schema.yaml
 STE_DOCS_DIR = $(DOCSDIR)/ste
+NEIS_SCHEMA = $(SCHEMA_DIR)/neis_schema.yaml
+NEIS_DOCS_DIR = $(DOCSDIR)/neis
 
 # --- linkml products --- #
 asti-jsonschema: $(ASTI_SCHEMA)
@@ -18,6 +20,9 @@ asti-owl: $(ASTI_SCHEMA)
 
 ste-jsonschema: $(STE_SCHEMA)
 	gen-json-schema $< > jsonschema/ste_schema.json
+
+ste-jsonschema: $(NEIS_SCHEMA)
+	gen-json-schema $< > jsonschema/neis_schema.json
 
 ## remove products
 clean-products:
@@ -34,6 +39,7 @@ gendoc: $(DOCSDIR)
 	if [ -f $(DOCSDIR)/index.md ]; then \
 		cp $(DOCSDIR)/index.md $(DOCSDIR)/_home.md; \
 	fi
+
 	# Step 2: Generate schema docs and Rename generated schema doc if needed
 	gen-doc -d $(DOCSDIR) $(ASTI_SCHEMA)
 	if [ -f $(DOCSDIR)/index.md ]; then \
@@ -43,7 +49,12 @@ gendoc: $(DOCSDIR)
 	if [ -f $(DOCSDIR)/index.md ]; then \
 		mv $(DOCSDIR)/index.md $(DOCSDIR)/ste_schema.md; \
 	fi
-	# Step 4: Restore homepage
+	gen-doc -d $(DOCSDIR) $(NEIS_SCHEMA)
+	if [ -f $(DOCSDIR)/index.md ]; then \
+		mv $(DOCSDIR)/index.md $(DOCSDIR)/neis_schema.md; \
+	fi
+
+	# Step 3: Restore homepage
 	if [ -f $(DOCSDIR)/_home.md ]; then \
 		mv $(DOCSDIR)/_home.md $(DOCSDIR)/index.md; \
 	fi
