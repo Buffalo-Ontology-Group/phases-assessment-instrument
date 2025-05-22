@@ -15,6 +15,7 @@ prefixes:
   RO: http://purl.obolibrary.org/obo/RO_       # Relation Ontology
   TIME: http://purl.obolibrary.org/obo/TIME_   # Time Ontology in OWL
   # Consider adding OBI: http://purl.obolibrary.org/obo/OBI_ for assessment-related terms
+  
 
 default_prefix: asti
 default_range: string
@@ -40,24 +41,24 @@ classes:
       The set of responses to the 18 questions in the ASTI instrument for a single assessment.
     slots:
       # ASTI Questions - responses are on a 4-point Likert scale (1-4)
-      - item_1
-      - item_2
-      - item_3
-      - item_4  # Reverse-scored
-      - item_5
-      - item_6
-      - item_7
-      - item_8  # Reverse-scored
-      - item_9  # Reverse-scored
-      - item_10 # Reverse-scored
-      - item_11
-      - item_12
-      - item_13
-      - item_14 # Reverse-scored
-      - item_15
-      - item_16
-      - item_17 # Reverse-scored
-      - item_18
+      - asti_item_1
+      - asti_item_2
+      - asti_item_3
+      - asti_item_4 # Reverse-scored
+      - asti_item_5
+      - asti_item_6
+      - asti_item_7
+      - asti_item_8 # Reverse-scored
+      - asti_item_9 # Reverse-scored
+      - asti_item_10 # Reverse-scored
+      - asti_item_11
+      - asti_item_12
+      - asti_item_13
+      - asti_item_14 # Reverse-scored
+      - asti_item_15
+      - asti_item_16
+      - asti_item_17 # Reverse-scored
+      - asti_item_18
 
   Person:
     description: >-
@@ -111,98 +112,98 @@ slots:
   # The range for each is ASTILikertScale.
   # Remember to replace placeholder NBO/MFOEM slot_uris with actual ontology terms representing the core concept of the question.
 
-  item_1:
+  asti_item_1:
     description: "Response to: I am more likely to engage in quiet contemplation."
     range: ASTILikertScale
     slot_uri: asti:item_1_response # Using local prefix for clarity; map to ontology if a direct concept exists for this question's theme
                                   # e.g., map to a concept related to 'contemplation'
-  item_2:
+  asti_item_2:
     description: "Response to: I feel that my individual life is a part of a greater whole."
     range: ASTILikertScale
     slot_uri: asti:item_2_response # e.g., map to 'connectedness' or 'sense of belonging to universe'
 
-  item_3:
+  asti_item_3:
     description: "Response to: I have become less concerned about other people's opinions of me."
     range: ASTILikertScale
     slot_uri: asti:item_3_response # e.g., map to 'independence from social evaluation'
 
-  item_4:
+  asti_item_4:
     description: "Response to: I feel that my life has less meaning."
     range: ASTILikertScale
     notes: This item is reverse-scored.
     slot_uri: asti:item_4_response # e.g., map to 'perception of life meaning' (note the negative phrasing)
 
-  item_5:
+  asti_item_5:
     description: "Response to: I am more focused on the present."
     range: ASTILikertScale
     slot_uri: asti:item_5_response # e.g., map to 'present-moment focus' or 'mindfulness'
 
-  item_6:
+  asti_item_6:
     description: "Response to: I feel a greater sense of belonging with both earlier and future generations."
     range: ASTILikertScale
     slot_uri: asti:item_6_response # e.g., map to 'intergenerational connectedness'
 
-  item_7:
+  asti_item_7:
     description: "Response to: My peace of mind is not so easily upset as it used to be."
     range: ASTILikertScale
     slot_uri: asti:item_7_response # e.g., map to 'emotional equanimity' or 'resilience'
 
-  item_8:
+  asti_item_8:
     description: "Response to: I feel more isolated and lonely."
     range: ASTILikertScale
     notes: This item is reverse-scored.
     slot_uri: asti:item_8_response # e.g., map to 'feeling of isolation' or 'loneliness'
 
-  item_9:
+  asti_item_9:
     description: "Response to: I am less interested in seeking out social contacts."
     range: ASTILikertScale
     notes: This item is reverse-scored.
     slot_uri: asti:item_9_response # e.g., map to 'social withdrawal' or 'preference for solitude' (distinguish from loneliness)
 
-  item_10:
+  asti_item_10:
     description: "Response to: My sense of self has decreased as I have gotten older."
     range: ASTILikertScale
     notes: This item is reverse-scored.
     slot_uri: asti:item_10_response # e.g., map to 'sense of self strength' (note negative phrasing)
 
-  item_11:
+  asti_item_11:
     description: "Response to: My sense of self is less dependent on other people and things."
     range: ASTILikertScale
     slot_uri: asti:item_11_response # e.g., map to 'self-autonomy' or 'non-attachment'
 
-  item_12:
+  asti_item_12:
     description: "Response to: I do not become angry as easily."
     range: ASTILikertScale
     slot_uri: asti:item_12_response # e.g., map to 'anger regulation' or 'reduced irritability'
 
-  item_13:
+  asti_item_13:
     description: "Response to: I take myself less seriously."
     range: ASTILikertScale
     slot_uri: asti:item_13_response # e.g., map to 'self-detachment' or 'humility'
 
-  item_14:
+  asti_item_14:
     description: "Response to: I have less patience with other people."
     range: ASTILikertScale
     notes: This item is reverse-scored.
     slot_uri: asti:item_14_response # e.g., map to 'patience' (note negative phrasing)
 
-  item_15:
+  asti_item_15:
     description: "Response to: I find more joy in life."
     range: ASTILikertScale
     slot_uri: asti:item_15_response # e.g., map to 'experience of joy'
 
-  item_16:
+  asti_item_16:
     description: "Response to: Material things mean less to me."
     range: ASTILikertScale
     slot_uri: asti:item_16_response # e.g., map to 'materialism' (inverse) or 'value of non-material things'
 
-  item_17:
+  asti_item_17:
     description: "Response to: I am less optimistic about the future of humanity."
     range: ASTILikertScale
     notes: This item is reverse-scored.
     slot_uri: asti:item_17_response # e.g., map to 'optimism about humanity' (note negative phrasing)
 
-  item_18:
+  asti_item_18:
     description: "Response to: I feel much more compassionate, even toward my enemies."
     range: ASTILikertScale
     slot_uri: asti:item_18_response # e.g., map to 'compassion' or 'universal love'

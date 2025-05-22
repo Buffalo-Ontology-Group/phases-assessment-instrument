@@ -2,6 +2,8 @@ site_name: Phases Assessment Instrument
 site_url: https://buffalo-ontology-group.github.io/phases-assessment-instrument/
 repo_url: https://github.com/Buffalo-Ontology-Group/phases-assessment-instrument
 site_description: A tool for assessing the phases of a project.
+theme:
+  name: material
 
 plugins:
   - search
@@ -21,6 +23,5 @@ extra_javascript:
   - javascripts/tablesort.js
 
 nav:
-  - Home: /
   - ASTI Schema: asti_schema.md
   - STE Schema: ste_schema.md

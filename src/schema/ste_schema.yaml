@@ -46,17 +46,17 @@ classes:
     slots:
       # STE Items - responses are on a 7-point Likert scale (1-7)
       # Self-Loss Sub-Scale Items (1-5)
-      - item_1
-      - item_2
-      - item_3
-      - item_4
-      - item_5
+      - ste_item_1
+      - ste_item_2
+      - ste_item_3
+      - ste_item_4
+      - ste_item_5
       # Unity Sub-Scale Items (6-10)
-      - item_6
-      - item_7
-      - item_8
-      - item_9
-      - item_10
+      - ste_item_6
+      - ste_item_7
+      - ste_item_8
+      - ste_item_9
+      - ste_item_10
 
   Person:
     description: >-
@@ -123,43 +123,43 @@ slots:
   # STEResponses item slots
   # Range for all items is STE7PointLikertScale. No items are reverse-scored.
 
-  item_1:
+  ste_item_1:
     description: "Response to: I often have experiences in which I temporarily do not notice my sense of self at all."
     range: STE7PointLikertScale
     slot_uri: ste:item_1_response # Map to ontology concept for 'temporary loss of self-awareness' if available
-  item_2:
+  ste_item_2:
     description: "Response to: I often have experiences in which, for a moment, I lose my sense of self."
     range: STE7PointLikertScale
     slot_uri: ste:item_2_response # Map to ontology concept for 'momentary self-loss'
-  item_3:
+  ste_item_3:
     description: "Response to: I often have experiences in which my sense of self completely fades away."
     range: STE7PointLikertScale
     slot_uri: ste:item_3_response # Map to ontology concept for 'complete fading of self'
-  item_4:
+  ste_item_4:
     description: "Response to: I often have experiences in which my self boundaries temporarily fade away."
     range: STE7PointLikertScale
     slot_uri: ste:item_4_response # Map to ontology concept for 'fading self-boundaries'
-  item_5:
+  ste_item_5:
     description: "Response to: I often have experiences in which my sense of self feels much smaller."
     range: STE7PointLikertScale
     slot_uri: ste:item_5_response # Map to ontology concept for 'diminished sense of self'
-  item_6:
+  ste_item_6:
     description: "Response to: I often have experiences of feeling closely connected to everything."
     range: STE7PointLikertScale
     slot_uri: ste:item_6_response # Map to ontology concept for 'connectedness to everything'
-  item_7:
+  ste_item_7:
     description: "Response to: I often have experiences in which I am completely part of something larger than myself."
     range: STE7PointLikertScale
     slot_uri: ste:item_7_response # Map to ontology concept for 'being part of a larger whole'
-  item_8:
+  ste_item_8:
     description: "Response to: I often have experiences in which I feel a deep sense of communion with all living things."
     range: STE7PointLikertScale
     slot_uri: ste:item_8_response # Map to ontology concept for 'communion with living things'
-  item_9:
+  ste_item_9:
     description: "Response to: I often have experiences of feeling entirely connected to humanity."
     range: STE7PointLikertScale
     slot_uri: ste:item_9_response # Map to ontology concept for 'connectedness to humanity'
-  item_10:
+  ste_item_10:
     description: "Response to: I often have experiences in which I feel a deep sense of oneness with all things."
     range: STE7PointLikertScale
     slot_uri: ste:item_10_response # Map to ontology concept for 'oneness with all things'
