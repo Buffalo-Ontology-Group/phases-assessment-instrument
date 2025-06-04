@@ -23,10 +23,10 @@ asti-owl: $(ASTI_SCHEMA)
 ste-jsonschema: $(STE_SCHEMA)
 	gen-json-schema $< > jsonschema/ste_schema.json
 
-ste-jsonschema: $(NEIS_SCHEMA)
+neis-jsonschema: $(NEIS_SCHEMA)
 	gen-json-schema $< > jsonschema/neis_schema.json
 
-ste-jsonschema: $(YADEN_SCHEMA)
+yaden-jsonschema: $(YADEN_SCHEMA)
 	gen-json-schema $< > jsonschema/yaden_schema.json
 
 ## remove products
