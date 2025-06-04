@@ -8,6 +8,8 @@ STE_SCHEMA = $(SCHEMA_DIR)/ste_schema.yaml
 STE_DOCS_DIR = $(DOCSDIR)/ste
 NEIS_SCHEMA = $(SCHEMA_DIR)/neis_schema.yaml
 NEIS_DOCS_DIR = $(DOCSDIR)/neis
+YADEN_SCHEMA = $(SCHEMA_DIR)/yaden_schema.yaml
+YADEN_DOCS_DIR = $(DOCSDIR)/yaden
 
 # --- linkml products --- #
 asti-jsonschema: $(ASTI_SCHEMA)
@@ -23,6 +25,9 @@ ste-jsonschema: $(STE_SCHEMA)
 
 ste-jsonschema: $(NEIS_SCHEMA)
 	gen-json-schema $< > jsonschema/neis_schema.json
+
+ste-jsonschema: $(YADEN_SCHEMA)
+	gen-json-schema $< > jsonschema/yaden_schema.json
 
 ## remove products
 clean-products:
@@ -45,13 +50,20 @@ gendoc: $(DOCSDIR)
 	if [ -f $(DOCSDIR)/index.md ]; then \
 		mv $(DOCSDIR)/index.md $(DOCSDIR)/asti_schema.md; \
 	fi
+	
 	gen-doc -d $(DOCSDIR) $(STE_SCHEMA)
 	if [ -f $(DOCSDIR)/index.md ]; then \
 		mv $(DOCSDIR)/index.md $(DOCSDIR)/ste_schema.md; \
 	fi
+
 	gen-doc -d $(DOCSDIR) $(NEIS_SCHEMA)
 	if [ -f $(DOCSDIR)/index.md ]; then \
 		mv $(DOCSDIR)/index.md $(DOCSDIR)/neis_schema.md; \
+	fi
+	
+	gen-doc -d $(DOCSDIR) $(YADEN_SCHEMA)
+	if [ -f $(DOCSDIR)/index.md ]; then \
+		mv $(DOCSDIR)/index.md $(DOCSDIR)/yaden_schema.md; \
 	fi
 
 	# Step 3: Restore homepage
