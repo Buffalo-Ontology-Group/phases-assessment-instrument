@@ -130,53 +130,53 @@ slots:
   # Self-Loss Sub-Scale (Items 1-5)
   yaden_ste_item_1:
     description: "Response to: I temporarily did not notice my sense of self at all / I have had a transformative experience in which I temporarily did not notice my sense of self at all / I often have experiences in which I temporarily do not notice my sense of self at all."
-    range: STELikertScale
+    range: STE7PointLikertScale
     slot_uri: yaden-ste:item_1_response # Maps to self-awareness dissolution
 
   yaden_ste_item_2:
     description: "Response to: For a moment, I felt that I lost my sense of self / I have had a transformative experience in which, for a moment, I lost my sense of self / I often have experiences in which, for a moment, I lose my sense of self."
-    range: STELikertScale
+    range: STE7PointLikertScale
     slot_uri: yaden-ste:item_2_response # Maps to ego dissolution
 
   yaden_ste_item_3:
     description: "Response to: I felt my sense of self completely fade away / I have had a transformative experience in which my sense of self completely faded away / I often have experiences in which my sense of self completely fades away."
-    range: STELikertScale
+    range: STE7PointLikertScale
     slot_uri: yaden-ste:item_3_response # Maps to complete self-dissolution
 
   yaden_ste_item_4:
     description: "Response to: I felt my sense of self boundaries temporarily fade away / I have had a transformative experience in which my self boundaries temporarily faded away / I often have experiences in which my self boundaries temporarily fade away."
-    range: STELikertScale
+    range: STE7PointLikertScale
     slot_uri: yaden-ste:item_4_response # Maps to boundary dissolution
 
   yaden_ste_item_5:
     description: "Response to: I experienced my sense of self as feeling much smaller / I have had a transformative experience in which my sense of self felt much smaller / I often have experiences in which my sense of self feels much smaller."
-    range: STELikertScale
+    range: STE7PointLikertScale
     slot_uri: yaden-ste:item_5_response # Maps to self-diminishment
 
   # Unity Sub-Scale (Items 6-10)
   yaden_ste_item_6:
     description: "Response to: I had the sense of feeling closely connected to everything / I have had a transformative experience of feeling closely connected to everything / I often have experiences of feeling closely connected to everything."
-    range: STELikertScale
+    range: STE7PointLikertScale
     slot_uri: yaden-ste:item_6_response # Maps to universal connectedness
 
   yaden_ste_item_7:
     description: "Response to: I felt as if I was completely part of something larger than myself / I have had a transformative experience in which I was completely part of something larger than myself / I often have experiences in which I am completely part of something larger than myself."
-    range: STELikertScale
+    range: STE7PointLikertScale
     slot_uri: yaden-ste:item_7_response # Maps to cosmic unity
 
   yaden_ste_item_8:
     description: "Response to: I felt a deep sense of communion with all living things / I have had a transformative experience in which I felt a deep sense of communion with all living things / I often have experiences in which I feel a deep sense of communion with all living things."
-    range: STELikertScale
+    range: STE7PointLikertScale
     slot_uri: yaden-ste:item_8_response # Maps to biospheric communion
 
   yaden_ste_item_9:
     description: "Response to: I felt entirely connected to humanity / I have had a transformative experience of feeling entirely connected to humanity / I often have experiences of feeling entirely connected to humanity."
-    range: STELikertScale
+    range: STE7PointLikertScale
     slot_uri: yaden-ste:item_9_response # Maps to human connectedness
 
   yaden_ste_item_10:
     description: "Response to: I experienced a deep sense of oneness with all things / I have had a transformative experience in which I felt a deep sense of oneness with all things / I often have experiences in which I feel a deep sense of oneness with all things."
-    range: STELikertScale
+    range: STE7PointLikertScale
     slot_uri: yaden-ste:item_10_response # Maps to universal oneness
 
   # Person attributes
