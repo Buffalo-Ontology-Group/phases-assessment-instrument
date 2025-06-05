@@ -26,6 +26,8 @@ ste-jsonschema: $(STE_SCHEMA)
 neis-jsonschema: $(NEIS_SCHEMA)
 	gen-json-schema $< > jsonschema/neis_schema.json
 
+yaden-jsonschema: $(YADEN_SCHEMA)
+	gen-json-schema $< > jsonschema/yaden_schema.json
 
 ## remove products
 clean-products:
@@ -57,6 +59,11 @@ gendoc: $(DOCSDIR)
 	gen-doc -d $(DOCSDIR) $(NEIS_SCHEMA)
 	if [ -f $(DOCSDIR)/index.md ]; then \
 		mv $(DOCSDIR)/index.md $(DOCSDIR)/neis_schema.md; \
+	fi
+	
+	gen-doc -d $(DOCSDIR) $(YADEN_SCHEMA)
+	if [ -f $(DOCSDIR)/index.md ]; then \
+		mv $(DOCSDIR)/index.md $(DOCSDIR)/yaden_schema.md; \
 	fi
 
 	# Step 3: Restore homepage

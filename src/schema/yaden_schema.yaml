@@ -98,7 +98,7 @@ slots:
 
   responses:
     description: The complete set of responses provided by the subject for this STE assessment.
-    range: STEResponses
+    range: YadenSTEResponses
     required: true
 
   self_loss_subscore:
