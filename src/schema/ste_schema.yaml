@@ -188,7 +188,7 @@ enums:
   STE7PointLikertScale:
     description: >-
       A 7-point Likert scale where 1 is 'Completely Disagree' and 7 is 'Completely Agree'.
-      Includes codes for skipped or refused questions.
+      used in the STE Trait - Often scale.
     permissible_values:
       1:
         description: "Completely Disagree"

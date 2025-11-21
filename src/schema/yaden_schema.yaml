@@ -219,34 +219,20 @@ enums:
 
   STE7PointLikertScale:
     description: >-
-      A 7-point Likert scale from 'Completely Disagree' (1) to 'Completely Agree' (7)
+      A 7-point Likert scale where 1 is 'Completely Disagree' and 7 is 'Completely Agree'.
       used in the STE Trait - Often scale.
     permissible_values:
-      "Completely Disagree":
-        description: "Corresponds to a score of 1."
-        rank: 1
-        # meaning: # Map to appropriate ontology term if desired
-      "Strongly Disagree":
-        description: "Corresponds to a score of 2."
-        rank: 2
-        # meaning:
-      "Somewhat Disagree":
-        description: "Corresponds to a score of 3."
-        rank: 3
-        # meaning:
-      "Neutral":
-        description: "Corresponds to a score of 4."
-        rank: 4
-        # meaning:
-      "Somewhat Agree":
-        description: "Corresponds to a score of 5."
-        rank: 5
-        # meaning:
-      "Strongly Agree":
-        description: "Corresponds to a score of 6."
-        rank: 6
-        # meaning:
-      "Completely Agree":
-        description: "Corresponds to a score of 7."
-        rank: 7
-        # meaning:
+      1:
+        description: "Completely Disagree"
+      2:
+        description: "Strongly Disagree"
+      3:
+        description: "Somewhat Disagree"
+      4:
+        description: "Neutral"
+      5:
+        description: "Somewhat Agree"
+      6:
+        description: "Strongly Agree"
+      7:
+        description: "Completely Agree"
