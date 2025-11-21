@@ -11,8 +11,8 @@ on:
     paths:
       - 'mkdocs.yml' # Only trigger if the mkdocs.yml file changes
       - src/schema/**.yaml
-      - 'src/docs/*.md'
-      - 'src/docs/*.html'
+      - '/docs/*.md'
+      - '/docs/*.html'
       - 'docs/images/*'
       - Makefile
       - requirements.txt
