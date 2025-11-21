@@ -237,19 +237,15 @@ enums:
       A 4-point Likert scale from 'Disagree Strongly' (1) to 'Agree Strongly' (4) used in the ASTI.
       Values are numeric strings.
     permissible_values:
-      "Disagree strongly": # Actual value stored in data
-        description: "Corresponds to a score of 1."
-        rank: 1
-        meaning: NCIT:C103506 # 'strongly decreased intensity' (example, find best fit)
-      "Disagree somewhat":
-        description: "Corresponds to a score of 2."
-        rank: 2
-        meaning: NCIT:C91291 # 'decreased intensity' (example)
-      "Agree somewhat":
-        description: "Corresponds to a score of 3."
-        rank: 3
-        meaning: NCIT:C91292 # 'increased intensity' (example)
-      "Agree strongly":
-        description: "Corresponds to a score of 4."
-        rank: 4
-        meaning: NCIT:C91293 # 'strongly increased intensity' (example)
+      1:
+        description: "Disagree Strongly"
+        meaning: NCIT:C103506
+      2:
+        description: "Disagree Somewhat"
+        meaning: NCIT:C91291
+      3:
+        description: "Agree Somewhat"
+        meaning: NCIT:C91292
+      4:
+        description: "Agree Strongly"
+        meaning: NCIT:C91293

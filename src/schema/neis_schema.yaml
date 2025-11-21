@@ -236,21 +236,15 @@ enums:
       A 6-point Likert scale used in the NEIS instrument, ranging from
       '1 - Strongly Disagree' to '6 - Strongly Agree'.
     permissible_values:
-      "Strongly Disagree":
-        description: "Corresponds to a score of 1."
-        rank: 1 # Optional: if explicit ordering or numerical value is needed beyond text
-      "Disagree":
-        description: "Corresponds to a score of 2."
-        rank: 2
-      "Slightly Disagree":
-        description: "Corresponds to a score of 3."
-        rank: 3
-      "Slightly Agree":
-        description: "Corresponds to a score of 4."
-        rank: 4
-      "Agree":
-        description: "Corresponds to a score of 5."
-        rank: 5
-      "Strongly Agree":
-        description: "Corresponds to a score of 6."
-        rank: 6
+      1:
+        description: "Strongly Disagree"
+      2:
+        description: "Disagree"
+      3:
+        description: "Slightly Disagree"
+      4:
+        description: "Slightly Agree"
+      5:
+        description: "Agree"
+      6:
+        description: "Strongly Agree"
